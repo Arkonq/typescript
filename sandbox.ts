@@ -1,31 +1,52 @@
-let character = "Name";
-let age = 24;
-let isPensioner = false;
+// explicit types
+let character: string;
+let age: number;
+let isLoggedIn: boolean;
 
-// Define type of argument
-const circ = (diameter: number) => {
-  return diameter * Math.PI;
-}
-console.log(circ(3));
+// arrays
+let items: string[] = []; // array need to be initialized to use push() method
+items.push('Item 1');
 
-
-let names = ['one','two','three'];
-names.push('four');
-// names[0] = 1; // Can't take any other type than string
-
-let nums = [1,2,3];
-nums.push(2);
-// nums.push('text') // Can't take any other type than number
-
-// Amount of types in init gives it possibility to have those types
-let mixed = ['name', 4, "surname", true]; 
-mixed.push(1);
-mixed.push('two');
+// union types
+let mixed: (string|number|boolean)[] = [];
+mixed.push("String");
+mixed.push(100);
 mixed.push(false);
-mixed[4] = 33;
 
-let obj = {
-  name: "name",
+let uid: string|number;
+uid = 123;
+uid = 'string';
+
+// objects
+let userOne: object;
+userOne = {
+  name: "Name",
   age: 23,
-  isOld: false,
-}
+};
+
+let userTwo: {
+  name: string,
+  age: number,
+  isOld: boolean,
+};
+
+// any type
+let anyType: any;
+anyType = "string";
+anyType = [23, false, "str"];
+anyType = { name: 'Name', isOld: false };
+
+let mixedArr: any[] = [];
+mixedArr.push(3);
+mixedArr.push(true);
+mixedArr.push("text");
+
+let userAnyType: {
+  name: any,
+  age: any,
+  isOld: any,
+};
+
+userAnyType = {name: 23, age: true, isOld: "no"};
+
+// that's why any type should be used in most rarest cases
