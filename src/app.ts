@@ -1,3 +1,43 @@
+// interfaces
+interface Person {
+  name: string,
+  age: number,
+  speak(text: string): void;
+  spend(cash: number): number;
+}
+
+const personOne: Person = {
+  name: "Jake",
+  age: 22,
+  speak(words) {
+    console.log(words);
+  },
+  spend(money) {
+    console.log(`I spent ${money}`);
+    return money;
+  },
+};
+
+const personTwo: Person = {
+  name: "another",
+  age: 611,
+  speak(words) {
+    console.log("another thing, cause i can do it in interfaces");
+  },
+  spend(dollars) {
+    console.log(`I don't spend ${dollars} at all`);
+    return dollars;
+  },
+};
+
+console.log(personOne, personTwo);
+
+const greetPerson = (individual: Person) => {
+  console.log(`Hello ${individual.name}!`);
+}
+
+greetPerson(personOne);
+
 import { Invoice } from './modules/Invoice.js';
 
 const invOne = new Invoice("Mario", 'work on website', 150);
