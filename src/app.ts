@@ -1,12 +1,27 @@
-// const anchor = document.querySelector('a')!; // ! says that it wont be null for sure
+// classes
+class Invoice {
+  client: string;
+  details: string;
+  amount: number;
 
-// // if (anchor) {
-// //   console.log(anchor.href);
-// // }
+  constructor(c: string, d: string, a: number) {
+    this.client = c;
+    this.details = d;
+    this.amount = a;
+  }
 
-// console.log(anchor.href);
+  format() {
+    return `${this.client} owes £${this.amount} for ${this.details}`;
+  }
+}
 
-// const form = document.querySelector('form')!;
+const invOne = new Invoice("Mario", 'work on website', 150);
+const invTwo = new Invoice("Jack", 'work on website', 230);
+
+let invoices: Invoice[] = [];
+invoices.push(invOne, invTwo);
+console.log(invoices);
+
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
 // inputs
