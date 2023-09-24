@@ -13,32 +13,24 @@ const ul = document.querySelector('ul');
 const list = new ListTemplate(ul);
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    let values;
+    values = [tofrom.value, details.value, amount.valueAsNumber];
     let doc;
     if (type.value === 'invoice') {
-        doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Invoice(...values);
     }
     else {
-        doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+        doc = new Payment(...values);
     }
     list.render(doc, type.value);
 });
-// ENUMS
-var ResourceType;
-(function (ResourceType) {
-    ResourceType[ResourceType["Book"] = 1] = "Book";
-    ResourceType[ResourceType["Author"] = 2] = "Author";
-    ResourceType[ResourceType["Film"] = 3] = "Film";
-    ResourceType[ResourceType["Director"] = 4] = "Director";
-    ResourceType[ResourceType["Person"] = 5] = "Person";
-})(ResourceType || (ResourceType = {}));
-const docOne = {
-    uid: 1,
-    resourceType: ResourceType.Film,
-    data: { title: 'some data title' },
-};
-const docTwo = {
-    uid: 2,
-    resourceType: ResourceType.Author,
-    data: { name: "Name here" },
-};
-console.log(docOne, docTwo);
+// Tuples
+let arr = ['str', 22, true];
+arr[0] = false;
+arr[1] = 'another';
+arr = [52, false, 'text'];
+let tuple = ['str', 22, true]; // In strict order
+tuple[0] = "false";
+tuple[1] = 66;
+let student; // In strict order
+student = ['name', 2516];

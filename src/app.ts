@@ -19,37 +19,29 @@ const list = new ListTemplate(ul);
 form.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
+  let values: [string, string, number];
+  values = [tofrom.value, details.value, amount.valueAsNumber]
+
   let doc: HasFormatter;
   if (type.value === 'invoice') {
-    doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+    doc = new Invoice(...values);
   } else {
-    doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+    doc = new Payment(...values);
   }
   
   list.render(doc, type.value);
 });
 
-// ENUMS
-enum ResourceType {
-  Book = 1, Author = 2, Film = 3, Director = 4, Person = 5
-}
+// Tuples
 
-interface Resource<T> {
-  uid: number;
-  resourceType: number;
-  data: T;
-}
+let arr = ['str', 22, true];
+arr[0] = false;
+arr[1] = 'another';
+arr = [52, false, 'text'];
 
-const docOne: Resource<object> = {
-  uid:1,
-  resourceType: ResourceType.Film,
-  data: { title: 'some data title'},
-}
+let tuple: [string, number, boolean] = ['str', 22, true]; // In strict order
+tuple[0] = "false";
+tuple[1] = 66;
 
-const docTwo: Resource<object> = {
-  uid:2,
-  resourceType: ResourceType.Author,
-  data: { name: "Name here" },
-}
-
-console.log(docOne, docTwo);
+let student: [string, number]; // In strict order
+student = ['name', 2516];
