@@ -1,38 +1,11 @@
-const personOne = {
-    name: "Jake",
-    age: 22,
-    speak(words) {
-        console.log(words);
-    },
-    spend(money) {
-        console.log(`I spent ${money}`);
-        return money;
-    },
-};
-const personTwo = {
-    name: "another",
-    age: 611,
-    speak(words) {
-        console.log("another thing, cause i can do it in interfaces");
-    },
-    spend(dollars) {
-        console.log(`I don't spend ${dollars} at all`);
-        return dollars;
-    },
-};
-console.log(personOne, personTwo);
-const greetPerson = (individual) => {
-    console.log(`Hello ${individual.name}!`);
-};
-greetPerson(personOne);
 import { Invoice } from './modules/Invoice.js';
-const invOne = new Invoice("Mario", 'work on website', 150);
-const invTwo = new Invoice("Jack", 'work on website', 230);
-let invoices = [];
-invoices.push(invOne, invTwo);
-invoices.forEach(inv => {
-    console.log(inv.format());
-});
+import { Payment } from './modules/Payment.js';
+let docOne;
+let docTwo;
+docOne = new Invoice('Yoshi', 'Web work', 150);
+docTwo = new Payment('Mario', 'Building work', 777);
+let docs = [];
+docs.push(docOne, docTwo);
 const form = document.querySelector('.new-item-form');
 // inputs
 const type = document.querySelector('#type');
@@ -41,5 +14,12 @@ const details = document.querySelector('#details');
 const amount = document.querySelector('#amount');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(type.value, tofrom.value, details.value, amount.valueAsNumber);
+    let doc;
+    if (type.value === "invoice") {
+        doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+    }
+    else {
+        doc = new Payment(tofrom.value, details.value, amount.valueAsNumber);
+    }
+    console.log(doc);
 });

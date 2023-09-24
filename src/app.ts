@@ -1,54 +1,14 @@
-// interfaces
-interface Person {
-  name: string,
-  age: number,
-  speak(text: string): void;
-  spend(cash: number): number;
-}
-
-const personOne: Person = {
-  name: "Jake",
-  age: 22,
-  speak(words) {
-    console.log(words);
-  },
-  spend(money) {
-    console.log(`I spent ${money}`);
-    return money;
-  },
-};
-
-const personTwo: Person = {
-  name: "another",
-  age: 611,
-  speak(words) {
-    console.log("another thing, cause i can do it in interfaces");
-  },
-  spend(dollars) {
-    console.log(`I don't spend ${dollars} at all`);
-    return dollars;
-  },
-};
-
-console.log(personOne, personTwo);
-
-const greetPerson = (individual: Person) => {
-  console.log(`Hello ${individual.name}!`);
-}
-
-greetPerson(personOne);
-
 import { Invoice } from './modules/Invoice.js';
+import { Payment } from './modules/Payment.js';
+import HasFormatter from './interfaces/HasFormatter.js';
 
-const invOne = new Invoice("Mario", 'work on website', 150);
-const invTwo = new Invoice("Jack", 'work on website', 230);
+let docOne: HasFormatter;
+let docTwo: HasFormatter;
+docOne = new Invoice('Yoshi', 'Web work', 150);
+docTwo = new Payment('Mario', 'Building work', 777);
 
-let invoices: Invoice[] = [];
-invoices.push(invOne, invTwo);
-
-invoices.forEach(inv => {
-  console.log(inv.format()); 
-})
+let docs: HasFormatter[] = [];
+docs.push(docOne, docTwo);
 
 const form = document.querySelector('.new-item-form') as HTMLFormElement;
 
@@ -61,10 +21,12 @@ const amount = document.querySelector('#amount') as HTMLInputElement;
 form.addEventListener('submit', (e: Event) => {
   e.preventDefault();
 
-  console.log(
-    type.value, 
-    tofrom.value, 
-    details.value, 
-    amount.valueAsNumber
-  );
+  let doc: HasFormatter;
+  if(type.value === "invoice") {
+    doc = new Invoice( tofrom.value, details.value, amount.valueAsNumber)
+  } else {
+    doc = new Payment( tofrom.value, details.value, amount.valueAsNumber)
+  }
+
+  console.log(doc);
 })
